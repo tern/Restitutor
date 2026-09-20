@@ -7,6 +7,10 @@
    "scripts": {
       "clean": "node clean.js",
       "build": "esbuild src/index.ts src/preload.ts --bundle --outdir=compiled --platform=node --packages=external",
+      "prototype:build": "esbuild src/runtime-prototype.ts --bundle --outfile=compiled/index.js --platform=node --packages=external",
+      "prototype:package": "npm run clean && npm run prototype:build && node node_modules/electron/install.js && node scripts/package-runtime-prototype.mjs",
+      "prototype:run:wayland": "./prototype-out/RestitutorRuntimePrototype-linux-x64/RestitutorRuntimePrototype --user-data-dir=/tmp/restitutor-runtime-prototype/wayland",
+      "prototype:run:xwayland": "./prototype-out/RestitutorRuntimePrototype-linux-x64/RestitutorRuntimePrototype --ozone-platform=x11 --user-data-dir=/tmp/restitutor-runtime-prototype/xwayland",
       "start": "npm run clean && npm run build && electron-forge start -- --in-process-gpu --disable-direct-composition",
       "package": "npm run clean && npm run build && electron-forge package",
       "make": "npm run build && electron-forge make",
@@ -30,7 +34,7 @@
       "@electron-forge/maker-zip": "^7.11.2",
       "@types/fs-extra": "^11.0.1",
       "@types/mime": "^3.0.4",
-      "electron": "29.4.6",
+      "electron": "44.4.3",
       "esbuild": "^0.27.3",
       "rimraf": "^6.0.1"
    }

@@ -89,6 +89,8 @@ typings/
 
 # Electron-Forge
 out/
+prototype-out/
+prototype-stage/
 
 save/
 dist/
